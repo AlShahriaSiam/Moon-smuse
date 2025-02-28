@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>🌙 Eternal Countdown for the Selenophile</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background: #0a043c;
+            color: #f0e6ef;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255,255,255,0.05);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(12px);
+        }
+
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 0.5em;
+            text-shadow: 0 0 15px #e2d1f9;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .time-unit {
+            background: rgba(255,255,255,0.2);
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            min-width: 120px;
+        }
+
+        .number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #fff3b0;
+        }
+
+        #message {
+            font-size: 1.4em;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Munia's Cosmic Timeline</h1>
+        <div class="countdown">
+            <div class="time-unit">
+                <div class="number" id="days">00</div>
+                <div class="label">Moon Cycles</div>
+            </div>
+            <div class="time-unit">
+                <div class="number" id="hours">00</div>
+                <div class="label">Stellar Hours</div>
+            </div>
+            <div class="time-unit">
+                <div class="number" id="minutes">00</div>
+                <div class="label">Galactic Minutes</div>
+            </div>
+            <div class="time-unit">
+                <div class="number" id="seconds">00</div>
+                <div class="label">Cosmic Seconds</div>
+            </div>
+        </div>
+        <p id="message">Time bends toward your dawn...</p>
+    </div>
+
+    <script>
+        // Universal Bangladeshi Time (UTC+6)
+        const targetUTC6 = Date.UTC(2024, 2, 17, 18, 0, 0); // March 18 00:00 UTC+6
+
+        function updateTimer() {
+            const nowUTC = new Date().getTime();
+            const diff = targetUTC6 - nowUTC;
+
+            if (diff < 0) {
+                document.getElementById('message').innerHTML = 
+                    "🌕 Happy Birthday, Eternal Selenophile!";
+                document.querySelector('.countdown').style.display = 'none';
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        // Start and lock timer
+        updateTimer();
+        setInterval(updateTimer, 1000);
+        Object.freeze(targetUTC6); // Prevent modification
+    </script>
+</body>
+</html>
